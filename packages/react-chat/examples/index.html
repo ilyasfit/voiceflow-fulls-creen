@@ -13,15 +13,19 @@
   <body>
     <script>
       function _vf_load() {
-        window.voiceflow.chat.load({
-          url: '<%= VITE_VF_RUNTIME_URL %>',
-          verify: { projectID: '<%= VITE_VF_PROJECT_ID %>' },
-          versionID: '<%= VITE_VF_VERSION_ID %>',
-          user: {
-            name: 'Development User',
-          },
-          allowDangerousHTML: false,
-        });
+        window.voiceflow.chat
+          .load({
+            url: '<%= VITE_VF_RUNTIME_URL %>',
+            verify: { projectID: '<%= VITE_VF_PROJECT_ID %>' },
+            versionID: '<%= VITE_VF_VERSION_ID %>',
+            user: {
+              name: 'Development User',
+            },
+            allowDangerousHTML: false,
+          })
+          .then(() => {
+            window.voiceflow.chat.open();
+          });
       }
     </script>
     <script type="module" src="../src/index.tsx" onload="_vf_load()"></script>

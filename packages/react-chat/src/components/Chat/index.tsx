@@ -82,14 +82,14 @@ const Chat: React.FC<ChatProps> = ({
 
   return (
     <Container withPrompt={hasAlert}>
-      <Header
+      {/* <Header
         title={title}
         image={image}
         actions={[
           { svg: 'minus', onClick: onMinimize },
           { svg: 'close', onClick: handleClose },
         ]}
-      />
+      /> */}
       <Dialog ref={dialogRef}>
         <AutoScrollProvider target={dialogRef}>
           <AssistantInfo title={title} avatar={avatar} description={description} />

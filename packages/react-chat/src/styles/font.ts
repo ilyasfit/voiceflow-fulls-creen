@@ -4,6 +4,8 @@ export const SIZES = {
   1: '13px',
   2: '15px',
   3: '18px',
+  4: '24px',
+  5: '32px',
 };
 
 export const WEIGHTS = {

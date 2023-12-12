@@ -8,6 +8,7 @@ import { RuntimeStateAPIContext, RuntimeStateContext } from '@/contexts';
 import { noop } from '@/utils/functional';
 import { useResolveAssistantStyleSheet } from '@/utils/stylesheet';
 import ChatWindow from '@/views/ChatWindow';
+import Sidebar from '@/components/Sidebar';
 
 import { ChatContainer, Container, LauncherContainer } from './styled';
 import { ChatAPI } from './types';
@@ -20,6 +21,7 @@ interface ChatWidgetProps extends React.PropsWithChildren {
 const ChatWidget: React.FC<ChatWidgetProps> = ({ chatAPI, ready }) => {
   const { assistant, open, close, interact } = useContext(RuntimeStateAPIContext);
   const { isOpen } = useContext(RuntimeStateContext);
+  // const isOpen = true;
 
   /** initialization */
   const [isHidden, setHidden] = useState(false);
@@ -62,7 +64,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ chatAPI, ready }) => {
   }, []);
 
   const side = assistant?.position ?? ChatPosition.RIGHT;
-  const position = { bottom: assistant?.spacing.bottom, [side]: assistant?.spacing.side };
+  // const position = { bottom: assistant?.spacing.bottom, [side]: assistant?.spacing.side };
 
   const isStyleSheetResolved = useResolveAssistantStyleSheet(assistant);
 
@@ -70,13 +72,15 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ chatAPI, ready }) => {
 
   return (
     <Container withChat={isOpen} isHidden={isHidden} className={theme}>
-      {!!assistant && (
+      {/* {!!assistant && (
         <LauncherContainer style={position}>
           <Proactive side={side} messages={proactiveMessages} />
           <Launcher onClick={open} image={assistant.launcher} />
         </LauncherContainer>
-      )}
-      <ChatContainer style={isMobile ? {} : position}>
+      )} */}
+      {/* <ChatContainer style={isMobile ? {} : position}> */}
+      <ChatContainer>
+        <Sidebar />
         <ChatWindow />
       </ChatContainer>
     </Container>
