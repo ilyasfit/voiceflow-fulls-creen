@@ -21,3 +21,10 @@ export const Image = styled(tag('div', 'image'), {
   backgroundSize: 'cover',
   borderRadius: '$1',
 });
+
+export const RestartButton = styled(tag('div', 'content'), {
+  padding: '50px',
+  height: 'calc(100% - 100px)',
+  color: '$white',
+  fontSize: '$5',
+});

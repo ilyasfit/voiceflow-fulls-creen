@@ -51,14 +51,7 @@ const Footer: React.FC<FooterProps> = ({ withWatermark, hasEnded, onStart, onSen
         // eslint-disable-next-line jsx-a11y/no-autofocus
         <ChatInput value={message} placeholder="Message…" autoFocus onValueChange={setMessage} onSend={handleSend} buffering={buffering} />
       )}
-      {withWatermark && (
-        <Watermark>
-          Assistant ⚡️ by
-          <a target="_blank" href="https://voiceflow.com" rel="noreferrer">
-            Voiceflow
-          </a>
-        </Watermark>
-      )}
+      <Watermark />
     </Container>
   );
 };

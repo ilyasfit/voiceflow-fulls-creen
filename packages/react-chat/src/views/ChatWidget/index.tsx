@@ -26,13 +26,24 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ chatAPI, ready }) => {
   /** initialization */
   const [isHidden, setHidden] = useState(false);
   const [proactiveMessages, setProactiveMessages] = useState<Trace.AnyTrace[]>([]);
-  const isMobile = useMemo(() => window.matchMedia('(max-width: 768px)').matches, []);
+  // const isMobile = useMemo(() => window.matchMedia('(max-width: 768px)').matches, []);
+
+  const [isMobile, setIsMobile] = useState(false);
 
   const theme = useTheme(assistant);
 
   /** initialize window */
   useEffect(() => {
     if (!isObject(chatAPI)) return undefined;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Attach the event listener to window resize
+    window.addEventListener('resize', handleResize);
+
+    // Initial check on component mount
+    handleResize();
 
     Object.assign(chatAPI, {
       open,
@@ -49,6 +60,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ chatAPI, ready }) => {
     ready?.();
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       Object.assign(chatAPI, {
         open: noop,
         hide: noop,
@@ -64,26 +76,30 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ chatAPI, ready }) => {
   }, []);
 
   const side = assistant?.position ?? ChatPosition.RIGHT;
-  // const position = { bottom: assistant?.spacing.bottom, [side]: assistant?.spacing.side };
+  const position = { bottom: assistant?.spacing.bottom, [side]: assistant?.spacing.side };
 
   const isStyleSheetResolved = useResolveAssistantStyleSheet(assistant);
 
   if (!isStyleSheetResolved) return null;
-
   return (
     <Container withChat={isOpen} isHidden={isHidden} className={theme}>
-      {/* {!!assistant && (
-        <LauncherContainer style={position}>
-          <Proactive side={side} messages={proactiveMessages} />
-          <Launcher onClick={open} image={assistant.launcher} />
-        </LauncherContainer>
-      )} */}
-      {/* <ChatContainer style={isMobile ? {} : position}> */}
       <ChatContainer>
-        <Sidebar />
+        {isMobile ? null : <Sidebar />}
         <ChatWindow />
       </ChatContainer>
     </Container>
+
+    // <Container withChat={isOpen} isHidden={isHidden} className={theme}>
+    //   {!!assistant && (
+    //     <LauncherContainer style={position}>
+    //       <Proactive side={side} messages={proactiveMessages} />
+    //       <Launcher onClick={open} image={assistant.launcher} />
+    //     </LauncherContainer>
+    //   )}
+    //   <ChatContainer style={isMobile ? {} : position}>
+    //     <ChatWindow />
+    //   </ChatContainer>
+    // </Container>
   );
 };
 

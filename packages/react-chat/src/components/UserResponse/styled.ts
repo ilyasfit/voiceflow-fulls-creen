@@ -19,9 +19,12 @@ export const Container = styled(tag('div'), {
   flexDirection: 'column',
   flexShrink: 0,
   alignItems: 'flex-end',
+  margin: '$4 0',
+  padding: '0 $5',
 
   [`& ${Message.Container}`]: {
-    maxWidth: 282,
+    // maxWidth: 282,
+    maxWidth: 400,
   },
 
   [`& > ${Tooltip.Container}`]: {

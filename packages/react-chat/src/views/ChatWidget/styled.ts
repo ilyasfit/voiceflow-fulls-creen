@@ -7,7 +7,7 @@ const MAX_CHAT_HEIGHT = 800;
 
 const tag = tagFactory(ClassName.WIDGET);
 
-export const ChatContainer: CSS = styled(tag('div', 'chat'), {
+export const ChatContainer = styled(tag('div', 'chat'), {
   // width: CHAT_WIDTH,
   width: '100%',
   maxWidth: '1100px',
