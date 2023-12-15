@@ -49,7 +49,15 @@ const Footer: React.FC<FooterProps> = ({ withWatermark, hasEnded, onStart, onSen
         <Button onClick={onStart}>Start New Chat</Button>
       ) : (
         // eslint-disable-next-line jsx-a11y/no-autofocus
-        <ChatInput value={message} placeholder="Message…" autoFocus onValueChange={setMessage} onSend={handleSend} buffering={buffering} />
+        <ChatInput
+          value={message}
+          placeholder="Message…"
+          autoFocus
+          onValueChange={setMessage}
+          onSend={handleSend}
+          onRestart={onStart}
+          buffering={buffering}
+        />
       )}
       <Watermark />
     </Container>

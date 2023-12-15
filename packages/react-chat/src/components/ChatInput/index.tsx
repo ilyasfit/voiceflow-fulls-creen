@@ -1,5 +1,5 @@
 import cuid from 'cuid';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import Bubble from '@/components/Bubble';
 import Input, { InputProps } from '@/components/Input';
@@ -17,9 +17,14 @@ export interface ChatInputProps extends InputProps {
    * A callback to submit the user response.
    */
   onSend?: VoidFunction;
+
+  /**
+   * A callback to restart the chat.
+   */
+  onRestart?: VoidFunction;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ id, onSend, buffering, ...props }) => {
+const ChatInput: React.FC<ChatInputProps> = ({ id, onSend, onRestart, buffering, ...props }) => {
   const internalID = useMemo(() => `vf-chat-input--${cuid()}`, []) ?? id;
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -30,9 +35,25 @@ const ChatInput: React.FC<ChatInputProps> = ({ id, onSend, buffering, ...props }
     event.preventDefault();
     onSend?.();
   };
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
+    // Attach the event listener to window resize
+    window.addEventListener('resize', handleResize);
+
+    // Initial check on component mount
+    handleResize();
+  }, []);
   return (
     <Container>
+      {isMobile ? (
+        <ButtonContainer htmlFor={internalID} ready={true} style={{ border: '0px' }}>
+          <Bubble size="small" svg="restart" onClick={onRestart} />
+        </ButtonContainer>
+      ) : null}
       <Input id={internalID} onKeyDown={handleKeyPress} {...props} />
       <ButtonContainer htmlFor={internalID} ready={!!props.value && !buffering}>
         <Bubble size="small" svg="smallArrowUp" onClick={onSend} />

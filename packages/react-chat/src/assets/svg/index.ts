@@ -5,3 +5,4 @@ export { ReactComponent as minus } from './minus.svg';
 export { ReactComponent as smallArrowUp } from './small-arrow-up.svg';
 export { ReactComponent as thumbsUp } from './thumbs-up.svg';
 export { ReactComponent as topCaret } from './top-caret.svg';
+export { ReactComponent as restart } from './restart.svg';
