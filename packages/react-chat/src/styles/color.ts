@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 
-export const PRIMARY = '#3d82e2';
+export const PRIMARY = '#3457D5';
 export const WARN = '#db1b42';
 
 export const SHADOWS = {

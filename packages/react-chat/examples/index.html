@@ -1,33 +1,35 @@
 <!-- THIS IS AN EXAMPLE PAGE AND SHOULD NOT BE USED OUTSIDE OF DEVELOPMENT -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Example Page</title>
-    <style>
-      body {
-        background-color: #f9f9f9;
-      }
-    </style>
-  </head>
 
-  <body>
-    <script>
-      function _vf_load() {
-        window.voiceflow.chat
-          .load({
-            url: '<%= VITE_VF_RUNTIME_URL %>',
-            verify: { projectID: '<%= VITE_VF_PROJECT_ID %>' },
-            versionID: '<%= VITE_VF_VERSION_ID %>',
-            user: {
-              name: 'Development User',
-            },
-            allowDangerousHTML: false,
-          })
-          .then(() => {
-            window.voiceflow.chat.open();
-          });
-      }
-    </script>
-    <script type="module" src="../src/index.tsx" onload="_vf_load()"></script>
-  </body>
+<head>
+  <title>PulseAI Preview</title>
+  <style>
+    body {
+      background-color: #F0F8FF;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    function _vf_load() {
+      window.voiceflow.chat
+        .load({
+          url: '<%= VITE_VF_RUNTIME_URL %>',
+          verify: { projectID: '<%= VITE_VF_PROJECT_ID %>' },
+          versionID: '<%= VITE_VF_VERSION_ID %>',
+          user: {
+            name: 'Development User',
+          },
+          allowDangerousHTML: false,
+        })
+        .then(() => {
+          window.voiceflow.chat.open();
+        });
+    }
+  </script>
+  <script type="module" src="../src/index.tsx" onload="_vf_load()"></script>
+</body>
+
 </html>

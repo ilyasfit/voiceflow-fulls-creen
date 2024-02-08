@@ -13,10 +13,13 @@ const Sidebar: React.FC = () => {
   return (
     <Container>
       <Content>
-        <Image css={{ backgroundImage: `url(${assistant.image})`, width: '50px', marginBottom: '140px' }} />
-        You've been invited to have a conversation with {assistant.title}
-        <Button style={{ background: '#2b2f32', position: 'absolute', bottom: '50px' }} onClick={runtime.launch}>
-          Restart Chat
+        <Image css={{ backgroundImage: `url('https://i.ibb.co/0sxbZCK/logo-white.png')`, height: '54px', width: '200px', marginBottom: '140px' }} />
+        <p style={{ fontFamily: 'Arial', fontSize: '28px' }}>
+          <span style={{ color: 'F0F8FF' }}>We automate.</span> <br></br>
+          You focus on work that matters.
+        </p>
+        <Button style={{ background: '#0F0F0F', position: 'absolute', bottom: '50px' }} onClick={runtime.launch}>
+          <p style={{ color: 'white', fontWeight: 500, margin: '0 14px' }}>Restart Chat</p>
         </Button>
       </Content>
     </Container>
